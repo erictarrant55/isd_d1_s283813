@@ -15,20 +15,32 @@ class Course(ABC):
             department: Department,
             credit_hours: int):
         """Represents a course at an education institution"""
-        self.__students = []
 
+        self.__students = []
+        """Initializes the new instance of the course class.
+
+
+            Args:
+                name(str) : the name of the course
+                department (Department) : The department that course comes from
+                credit_hours (int) : number of credit hours
+
+            Raises:
+                ValueError : Raised when incorrect args are provided
+        """
         if len(name.strip()) == 0:
             raise ValueError("name cannot be an empty string")
 
 
-        # if isinstance(credit_hours, int):
-            # if credit_hours <= 0:
-                # raise ValueError("credit_hours must be a value greater than 0")
-              
+        if isinstance(credit_hours, int):
+            if credit_hours <= 0:
+                raise ValueError("credit_hours must be a value greater than 0")
+            else:
+                self.credit_hours = credit_hours # call the setter directly
 
         self.__name = name
         self.__department = department
-        self.credit_hours = credit_hours # call the setter directly
+    
 
     @property
     def name(self) -> str:
@@ -60,7 +72,7 @@ class Course(ABC):
         self.__credit_hours = credit_hours
 
     @property
-    def students(self) -> list[Students]:
+    def students(self) -> list[Student]:
         """Gets the students enrolled in course.
         
             Returns:
